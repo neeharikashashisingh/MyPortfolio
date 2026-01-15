@@ -1,0 +1,355 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEEHARIKA'S SPACE 🌸</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Boogaloo&family=Quicksand:wght@400;700&display=swap');
+
+        :root {
+            --soft-pink: #ffdae9;
+            --deep-pink: #f48fb1;
+            --pastel-purple: #e1bee7;
+            --cream: #fff9fb;
+            --text: #4a4a4a;
+            --border: #5d5d5d;
+            --glass: rgba(255, 255, 255, 0.7);
+            --sparkle-blue: #a0e7e0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, #ffeef5 100%);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        /* ✨ FLOATING BUBBLES BACKGROUND */
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            background: var(--glass);
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.8;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 70px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-bottom: 5px solid var(--border);
+        }
+
+        header h1 {
+            font-family: 'Boogaloo', cursive;
+            font-size: clamp(2.5rem, 10vw, 4.5rem);
+            margin: 15px 0 10px;
+            color: var(--deep-pink);
+            text-shadow: 3px 3px 0px var(--pastel-purple), 5px 5px 0px var(--text);
+            animation: bounceIn 1.2s ease-out;
+            line-height: 1.1;
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(.9); }
+            100% { transform: scale(1); }
+        }
+
+        .profile-pic {
+            width: clamp(150px, 40vw, 200px);
+            height: clamp(150px, 40vw, 200px);
+            border-radius: 50%;
+            border: 7px solid var(--deep-pink);
+            box-shadow: 0 0 0 10px var(--pastel-purple), 0 0 0 15px var(--sparkle-blue);
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .container { 
+            max-width: 800px; 
+            margin: -40px auto 50px; 
+            padding: 15px; 
+        }
+
+        /* 📱 RESPONSIVE SYSTEM BAR */
+        .system-bar {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 3px solid var(--border);
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transform: translateY(-20px);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .card {
+            background: white;
+            border: 4px solid var(--border);
+            border-radius: 25px;
+            padding: clamp(20px, 5vw, 40px);
+            margin-bottom: 30px;
+            box-shadow: 8px 8px 0px var(--border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 12px 12px 0px var(--deep-pink);
+        }
+
+        h2 {
+            font-family: 'Boogaloo', cursive;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            color: var(--deep-pink);
+            text-align: center;
+            margin-top: 0;
+        }
+
+        /* 🚀 PROJECT LINKS */
+        .project-link {
+            display: flex;
+            text-decoration: none;
+            color: var(--text);
+            background: var(--cream);
+            border: 3px solid var(--border);
+            padding: 15px;
+            border-radius: 20px;
+            margin: 15px 0;
+            transition: 0.3s ease;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .project-link:hover {
+            transform: translateX(10px);
+            background: white;
+            border-color: var(--deep-pink);
+        }
+
+        /* 💬 CONTACT STICKERS */
+        .interactive-contact-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .contact-sticker {
+            display: flex;
+            align-items: center;
+            background: var(--cream);
+            border: 3px solid var(--border);
+            border-radius: 20px;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: left;
+        }
+
+        .contact-sticker:hover {
+            transform: scale(1.03) rotate(-1deg);
+            box-shadow: 6px 6px 0px var(--pastel-purple);
+            background: white;
+        }
+
+        .contact-sticker .icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+
+        .contact-sticker .text strong {
+            display: block;
+            font-size: 1.1em;
+            color: var(--deep-pink);
+        }
+
+        .resume-btn {
+            display: block;
+            background: linear-gradient(45deg, var(--deep-pink), #ff4d94);
+            color: white;
+            padding: 20px;
+            border: 4px solid var(--border);
+            border-radius: 25px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 8px 8px 0px var(--border);
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 20px;
+        }
+
+        .resume-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px var(--border);
+        }
+
+        footer { text-align: center; padding: 40px 20px; font-weight: bold; color: var(--deep-pink); font-size: 0.9rem; }
+
+        @media (max-width: 480px) {
+            header { padding: 40px 15px 60px; }
+            .project-link { flex-direction: column; text-align: center; }
+            .container { margin-top: -30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bubble" style="width: 80px; height: 80px; left: 5%; top: 80vh;"></div>
+    <div class="bubble" style="width: 120px; height: 120px; right: 10%; top: 50vh; animation-delay: 7s;"></div>
+
+    <header data-aos="fade-down">
+        <img src="my .jpeg" alt="Neeharika Shashi" class="profile-pic">
+        <h1>NEEHARIKA SHASHI</h1>
+        <p style="font-family: 'Boogaloo'; font-size: 1.4rem;">BCA Student & Technical Wizard! 🌟</p>
+    </header>
+
+    <div class="container">
+        <div class="system-bar" data-aos="zoom-in">
+            <span>🔋 Battery: <span id="bat">--</span></span>
+            <span>📍 <span id="user-location">Detecting...</span></span>
+            <span>⏰ Time: <span id="clock">00:00</span></span>
+        </div>
+
+        <div class="card" data-aos="fade-up">
+            <h2>About Me 🌸</h2>
+            <p style="line-height: 1.6;">
+                I am a 5th-semester BCA student at Manipal University Jaipur. 
+                Alongside my studies, I serve as a Technical Manager at Aaryan Anuj Enterprises in Patna, specializing in technical process improvement and development.
+            </p>
+        </div>
+
+        <div class="card" data-aos="fade-up">
+            <h2>My Cool Projects! 🚀</h2>
+            <a href="https://neeharikashashisingh.github.io/cyberShield-Mission/" target="_blank" class="project-link">
+                <span style="font-size: 2em;">🛡️</span>
+                <div>
+                    <strong>CyberShield Mission</strong>
+                    <p style="margin: 5px 0 0; font-size: 0.85rem;">Gamified digital safety platform.</p>
+                </div>
+            </a>
+            <a href="https://neeharikashashisingh.github.io/infinity-3d-flip-journal/" target="_blank" class="project-link">
+                <span style="font-size: 2em;">📓</span>
+                <div>
+                    <strong>Infinity 3D Flip Journal</strong>
+                    <p style="margin: 5px 0 0; font-size: 0.85rem;">Interactive 3D journaling experience.</p>
+                </div>
+            </a>
+            <a href="https://neeharikashashisingh.github.io/Student-Result-Management-System/" target="_blank" class="project-link">
+                <span style="font-size: 2em;">📊</span>
+                <div>
+                    <strong>Student Result System</strong>
+                    <p style="margin: 5px 0 0; font-size: 0.85rem;">Efficient academic tracking tool.</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="card" data-aos="fade-up" style="text-align: center;">
+            <h2>Let's Connect! 💬</h2>
+            
+            <div class="interactive-contact-wrapper">
+                <a href="https://www.linkedin.com/in/neeharika-shashi-47a8a2282" target="_blank" class="contact-sticker">
+                    <span class="icon">🔵</span>
+                    <div class="text">
+                        <strong>LinkedIn Profile</strong>
+                        <span>Connect for opportunities ↗</span>
+                    </div>
+                </a>
+
+                <a href="mailto:neeharikashashisingh@gmail.com" class="contact-sticker">
+                    <span class="icon">📧</span>
+                    <div class="text">
+                        <strong>Send an Email</strong>
+                        <span>neeharikashashisingh@gmail.com</span>
+                    </div>
+                </a>
+
+                <div class="contact-sticker">
+                    <span class="icon">📞</span>
+                    <div class="text">
+                        <strong>Call Me</strong>
+                        <span>+91 8825211274</span>
+                    </div>
+                </a>
+            </div>
+            
+            <a href="resume.jpg" target="_blank" class="resume-btn" onclick="triggerConfetti()">
+                GRAB MY RESUME! 🎉
+            </a>
+        </div>
+    </div>
+
+    <footer>HAND-CRAFTED BY NEEHARIKA SHASHI // 2026</footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Confetti Celebration
+        function triggerConfetti() {
+            confetti({ 
+                particleCount: 120, 
+                spread: 70, 
+                origin: { y: 0.8 },
+                colors: ['#ffdae9', '#f48fb1', '#e1bee7']
+            });
+        }
+
+        // Live Clock
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Dynamic Location API (Finds user's city)
+        fetch('https://ipapi.co/json/')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('user-location').innerText = `${data.city}, ${data.country_code}`;
+            })
+            .catch(() => {
+                document.getElementById('user-location').innerText = "Patna, India"; 
+            });
+
+        // Battery Status
+        if (navigator.getBattery) {
+            navigator.getBattery().then(function(battery) {
+                const updateBat = () => document.getElementById('bat').innerText = Math.round(battery.level * 100) + "%";
+                updateBat();
+                battery.onlevelchange = updateBat;
+            });
+        }
+    </script>
+</body>
+</html>
